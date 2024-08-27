@@ -1,17 +1,36 @@
 <?php
 include 'db_connection.php';
 
+// Log script start
+error_log("delete_user.php script started.");
+
+// Check if the database connection is successful
+if ($conn->connect_error) {
+    error_log("Database connection failed: " . $conn->connect_error);
+    die("Database connection failed.");
+}
+
+// Check if 'id' parameter is set
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = intval($_GET['id']); // Ensure $id is an integer
 
     // Prepare and bind
     $stmt = $conn->prepare("DELETE FROM Users WHERE id = ?");
+    if ($stmt === false) {
+        error_log("Error preparing statement: " . $conn->error);
+        die("Error preparing statement: " . $conn->error);
+    }
+
     $stmt->bind_param("i", $id);
 
     // Execute the statement
     if ($stmt->execute()) {
+        // Log success
+        error_log("User deleted successfully: ID=$id");
         echo "<p>User deleted successfully.</p>";
     } else {
+        // Log error deleting record
+        error_log("Error deleting record: " . $stmt->error);
         echo "Error deleting record: " . $stmt->error;
     }
 
@@ -20,6 +39,7 @@ if (isset($_GET['id'])) {
     echo "<p>No user ID provided for deletion.</p>";
 }
 
+// Close database connection
 $conn->close();
 ?>
 
