@@ -1,6 +1,7 @@
 <?php
-echo "You are in index.php";
-exit();
+include 'db_connection.php';
+
+// Optionally, you can include some content for the homepage here.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +13,9 @@ exit();
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5">Welcome to the Activity 4 Cloud App (Google Cloud)</h1>
-        <a href="add_user.php" class="btn btn-primary mt-3">Add User</a>
-        <a href="view_users.php" class="btn btn-secondary mt-3">View Users</a>
+        <h1 class="mt-5">Welcome to the Home Page</h1>
+        <a href="add_user.php" class="btn btn-primary">Add User</a>
+        <a href="view_users.php" class="btn btn-secondary">View Users</a>
     </div>
 </body>
 </html>
