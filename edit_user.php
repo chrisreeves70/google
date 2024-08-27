@@ -1,50 +1,25 @@
 <?php
 include 'db_connection.php';
 
-// Log script start
-error_log("edit_user.php script started.");
-
-// Check if the database connection is successful
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
-    die("Database connection failed.");
-}
-
-// Update user details if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = intval($_POST['id']); // Ensure $id is an integer
-    $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
 
-    // Prepare and bind
     $stmt = $conn->prepare("UPDATE Users SET name = ?, email = ? WHERE id = ?");
-    if ($stmt === false) {
-        error_log("Error preparing statement: " . $conn->error);
-        die("Error preparing statement: " . $conn->error);
-    }
-
     $stmt->bind_param("ssi", $name, $email, $id);
 
-    // Execute the statement
     if ($stmt->execute()) {
-        error_log("User updated successfully: ID=$id, Name=$name, Email=$email");
         echo "<p>User updated successfully.</p>";
     } else {
-        error_log("Error updating record: " . $stmt->error);
-        echo "Error updating record: " . $stmt->error;
+        echo "Error updating user: " . $stmt->error;
     }
 
     $stmt->close();
 }
 
-// Fetch user details
-$id = intval($_GET['id']); // Ensure $id is an integer
+$id = $_GET['id'];
 $stmt = $conn->prepare("SELECT * FROM Users WHERE id = ?");
-if ($stmt === false) {
-    error_log("Error preparing statement: " . $conn->error);
-    die("Error preparing statement: " . $conn->error);
-}
-
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -84,3 +59,4 @@ $conn->close();
     </div>
 </body>
 </html>
+
