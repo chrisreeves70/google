@@ -1,0 +1,16 @@
+runtime: php81 # Use the latest supported PHP version
+
+handlers:
+  - url: /.*
+    script: auto
+
+env_variables:
+  DB_HOST: "35.225.245.211"  # Your Google Cloud MySQL public IP address
+  DB_USER: "root"             # Your MySQL username
+  DB_PASS: "Scout1st"         # Your MySQL password
+  DB_NAME: "alpha_db"         # Your actual database name
+
+# Optional configuration for scaling
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
