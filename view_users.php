@@ -1,10 +1,21 @@
 <?php
 include 'db_connection.php';
 
+// Log script start
+error_log("view_users.php script started.");
+
+// Check if the database connection is successful
+if ($conn->connect_error) {
+    error_log("Database connection failed: " . $conn->connect_error);
+    die("Database connection failed.");
+}
+
+// Fetch users
 $sql = "SELECT * FROM Users";
 $result = $conn->query($sql);
 
 if ($result === false) {
+    error_log("Error fetching users: " . $conn->error);
     echo "Error fetching users: " . $conn->error;
     exit;
 }
@@ -56,3 +67,4 @@ if ($result === false) {
 <?php
 $conn->close();
 ?>
+
