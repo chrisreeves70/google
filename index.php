@@ -1,3 +1,7 @@
+<?php
+echo "You are in index.php";
+exit();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
