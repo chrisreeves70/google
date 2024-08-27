@@ -1,0 +1,9 @@
+steps:
+  # Step 1: Deploy to Google App Engine
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', '--quiet']
+    # Optional: You can specify the config file if it's not named 'app.yaml'
+    # args: ['app', 'deploy', 'app.yaml', '--quiet']
+
+# Optional: Define a timeout for the build
+timeout: '1200s'
