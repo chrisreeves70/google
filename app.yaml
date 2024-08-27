@@ -2,11 +2,12 @@ runtime: php81
 
 handlers:
   - url: /add_user\.php
-    script: add_user.php
+    script: auto
 
   - url: /view_users\.php
-    script: view_users.php
+    script: auto
 
+  # Catch-all handler for any other request and send it to index.php
   - url: /.*
     script: index.php
 
@@ -19,4 +20,3 @@ env_variables:
 automatic_scaling:
   min_instances: 1
   max_instances: 10
-
