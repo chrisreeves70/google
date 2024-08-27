@@ -4,7 +4,7 @@ steps:
     args: ['app', 'deploy', '--quiet']
 
 # Specify the logs bucket for storing build logs
-logs_bucket: 'gs://my-build-logs'
+logs_bucket: 'gs://my-build-logs24'
 
 # Optional: Define a timeout for the build
 timeout: '1200s'
