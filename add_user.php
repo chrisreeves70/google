@@ -1,52 +1,48 @@
 <?php
 include 'db_connection.php';
 
-// Log script start
-error_log("add_user.php script started.");
-
-// Check if the database connection is successful
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
-    die("Database connection failed.");
-}
-
-// Handle POST request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize inputs to prevent SQL injection
-    $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
+    $name = $_POST['name'];
+    $email = $_POST['email'];
 
-    // Prepare and bind
     $stmt = $conn->prepare("INSERT INTO Users (name, email) VALUES (?, ?)");
-    if ($stmt === false) {
-        error_log("Error preparing statement: " . $conn->error);
-        die("Error preparing statement: " . $conn->error);
-    }
-
     $stmt->bind_param("ss", $name, $email);
 
-    // Execute the statement
     if ($stmt->execute()) {
-        // Log success
-        error_log("User added successfully: Name=$name, Email=$email");
-        echo "User added successfully";
+        echo "<p>User added successfully.</p>";
     } else {
-        // Log error executing statement
-        error_log("Error executing statement: " . $stmt->error);
-        echo "Error executing statement: " . $stmt->error;
+        echo "Error adding user: " . $stmt->error;
     }
 
     $stmt->close();
+    $conn->close();
 }
-
-// Close database connection
-$conn->close();
 ?>
 
-<!-- HTML form -->
-<form method="post" action="">
-    Name: <input type="text" name="name" required>
-    Email: <input type="email" name="email" required>
-    <input type="submit" value="Add User">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Add User</h1>
+        <form method="post" action="add_user.php">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+        <a href="index.php" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+</body>
+</html>
 
