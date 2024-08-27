@@ -1,16 +1,22 @@
-runtime: php81 # Use the latest supported PHP version
+runtime: php81
 
 handlers:
+  - url: /add_user\.php
+    script: add_user.php
+
+  - url: /view_users\.php
+    script: view_users.php
+
+  # This will catch any other request and send it to index.php
   - url: /.*
-    script: auto
+    script: index.php
 
 env_variables:
-  DB_HOST: "35.225.245.211"  # Your Google Cloud MySQL public IP address
-  DB_USER: "root"             # Your MySQL username
-  DB_PASS: "Scout1st"         # Your MySQL password
-  DB_NAME: "alpha_db"         # Your actual database name
+  DB_HOST: "35.225.245.211"
+  DB_USER: "root"
+  DB_PASS: "Scout1st"
+  DB_NAME: "alpha_db"
 
-# Optional configuration for scaling
 automatic_scaling:
   min_instances: 1
   max_instances: 10
