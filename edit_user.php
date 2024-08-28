@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
 
-    $stmt = $conn->prepare("UPDATE Users SET name = ?, email = ? WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE users SET name = ?, email = ? WHERE id = ?");
     $stmt->bind_param("ssi", $name, $email, $id);
 
     if ($stmt->execute()) {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $id = $_GET['id'];
-$stmt = $conn->prepare("SELECT * FROM Users WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
