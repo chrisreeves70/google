@@ -1,25 +1,28 @@
 <?php
-include 'db_connection.php';
+// Debugging: Start of the script
+echo "Debug: add_user.php script started.<br>";
 
-// Log script start
-error_log("add_user.php script started.");
+// Include the database connection
+include 'db_connection.php';
 
 // Check if the database connection is successful
 if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
+    echo "Debug: Database connection failed: " . $conn->connect_error . "<br>";
     die("Database connection failed.");
+} else {
+    echo "Debug: Database connected successfully.<br>";
 }
 
 // Handle POST request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize inputs to prevent SQL injection
+    // Sanitize inputs
     $name = htmlspecialchars($_POST['name']);
     $email = htmlspecialchars($_POST['email']);
 
     // Prepare and bind
     $stmt = $conn->prepare("INSERT INTO users (name, email) VALUES (?, ?)");
     if ($stmt === false) {
-        error_log("Error preparing statement: " . $conn->error);
+        echo "Debug: Error preparing statement: " . $conn->error . "<br>";
         die("Error preparing statement: " . $conn->error);
     }
 
@@ -27,17 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the statement
     if ($stmt->execute()) {
-        // Log success
-        error_log("User added successfully: Name=$name, Email=$email");
+        echo "Debug: User added successfully: Name=$name, Email=$email<br>";
         header("Location: view_users.php");
         exit();
     } else {
-        // Log error executing statement
-        error_log("Error executing statement: " . $stmt->error);
-        echo "Error executing statement: " . $stmt->error;
+        echo "Debug: Error executing statement: " . $stmt->error . "<br>";
     }
 
     $stmt->close();
+} else {
+    echo "Debug: No POST request detected.<br>";
 }
 
 // Close database connection
