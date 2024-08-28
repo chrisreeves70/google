@@ -9,13 +9,13 @@ handlers:
 
   # Catch-all handler for any other request and send it to index.php
   - url: /.*
-    script: index.php
+    script: auto
 
 env_variables:
-  DB_HOST: "35.225.245.211"
+  DB_HOST: "104.154.99.108"
   DB_USER: "root"
   DB_PASS: "Scout1st"
-  DB_NAME: "alpha_db"
+  DB_NAME: "applicationdb"
 
 automatic_scaling:
   min_instances: 1
