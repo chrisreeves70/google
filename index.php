@@ -1,7 +1,4 @@
 
-
-// Optionally, you can include some content for the homepage here.
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
