@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = htmlspecialchars($_POST['email']);
 
     // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO Users (name, email) VALUES (?, ?)");
+    $stmt = $conn->prepare("INSERT INTO users (name, email) VALUES (?, ?)");
     if ($stmt === false) {
         error_log("Error preparing statement: " . $conn->error);
         die("Error preparing statement: " . $conn->error);
