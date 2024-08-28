@@ -1,5 +1,4 @@
-<?php
-include 'db_connection.php';
+
 
 // Optionally, you can include some content for the homepage here.
 ?>
