@@ -1,13 +1,16 @@
 <?php
-include 'db_connection.php';
+// Debugging: Start of the script
+echo "Debug: view_users.php script started.<br>";
 
-// Log script start
-error_log("view_users.php script started.");
+// Include the database connection
+include 'db_connection.php';
 
 // Check if the database connection is successful
 if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
+    echo "Debug: Database connection failed: " . $conn->connect_error . "<br>";
     die("Database connection failed.");
+} else {
+    echo "Debug: Database connected successfully.<br>";
 }
 
 // Fetch users
@@ -15,10 +18,11 @@ $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 
 if ($result === false) {
-    // Log error fetching users
-    error_log("Error fetching users: " . $conn->error);
+    echo "Debug: Error fetching users: " . $conn->error . "<br>";
     echo "Error fetching users: " . $conn->error;
     exit;
+} else {
+    echo "Debug: Users fetched successfully.<br>";
 }
 ?>
 
