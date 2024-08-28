@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch users
-$sql = "SELECT * FROM Users";
+$sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 
 if ($result === false) {
