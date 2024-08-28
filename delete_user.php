@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     $id = intval($_GET['id']); // Ensure $id is an integer
 
     // Prepare and bind
-    $stmt = $conn->prepare("DELETE FROM Users WHERE id = ?");
+    $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
     if ($stmt === false) {
         error_log("Error preparing statement: " . $conn->error);
         die("Error preparing statement: " . $conn->error);
