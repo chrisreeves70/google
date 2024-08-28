@@ -15,6 +15,7 @@ $sql = "SELECT * FROM Users";
 $result = $conn->query($sql);
 
 if ($result === false) {
+    // Log error fetching users
     error_log("Error fetching users: " . $conn->error);
     echo "Error fetching users: " . $conn->error;
     exit;
@@ -65,6 +66,7 @@ if ($result === false) {
 </html>
 
 <?php
+// Close database connection
 $conn->close();
 ?>
 
