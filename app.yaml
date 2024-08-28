@@ -1,13 +1,6 @@
 runtime: php81
 
 handlers:
-  - url: /add_user\.php
-    script: auto
-
-  - url: /view_users\.php
-    script: auto
-
-  # Catch-all handler for any other request and send it to index.php
   - url: /.*
     script: auto
 
